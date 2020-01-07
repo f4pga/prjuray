@@ -1,0 +1,17 @@
+database/*
+env
+build
+build_*
+logs
+logs_*
+database
+.Xil
+**/specimen_*
+**/output
+run.ok
+run.*.ok
+fuzzer_*.ok
+__pycache__
+*.pyc
+*.swp
+*.dcp
