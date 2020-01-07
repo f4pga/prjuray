@@ -1,0 +1,3 @@
+[^.]+\.IOB_X0Y[0-9]+\..*
+[^.]+\.HPIOBDIFFINBUF_X0Y[0-9]+\..*
+[^.]+\.HPIOBDIFFOUTBUF_X0Y[0-9]+\..*
