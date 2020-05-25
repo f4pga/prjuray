@@ -170,7 +170,7 @@ class Segmaker:
                 # Bit ranges in the Frame Address Register Description differs between US+ and US devices
                 # For US the ranges are identical to 7-series, but US+ is shifted 1 bit left
                 # Refer to UG570 Table 9-21
-                base_frame = bit_frame & (~0xff if os.getenv("URAY_ARCH") in
+                base_frame = bit_frame & (~0xff if os.getenv("URAY_ARCH") ==
                                           "UltraScalePlus" else ~0x7f)
                 self.bits.setdefault(base_frame, dict()).setdefault(
                     bit_wordidx, set()).add((bit_frame, bit_wordidx,
@@ -365,7 +365,9 @@ class Segmaker:
             segments = self.segments_by_type.setdefault(tile_type, dict())
 
             tile_type_norm = tile_type
-            if tile_type_norm in ['CLEL_L', 'CLEL_R', 'CLEM', 'CLEM_R']:
+            if tile_type_norm in [
+                    'CLEL_L', 'CLEL_R', 'CLEM', 'CLEM_R', 'CLE_M', 'CLE_M_R'
+            ]:
                 tile_type_norm = 'CLE'
 
             if tile_type_norm in ['RCLK_INT_L', 'RCLK_INT_R']:

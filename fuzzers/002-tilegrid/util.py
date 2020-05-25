@@ -15,6 +15,8 @@ import json
 '''
 Local utils script to hold shared code of the 005-tilegrid fuzzer scripts
 '''
+WORDS_IN_FRAME = 93 if os.getenv('URAY_ARCH') == 'UltraScalePlus' else 123
+BITS_PER_WORD = 16 if os.getenv('URAY_ARCH') == 'UltraScalePlus' else 32
 
 
 class TileFrames:
@@ -60,13 +62,23 @@ class TileFrames:
 def get_entry(tile_type, block_type):
     """ Get frames and words for a given tile_type (e.g. CLBLL) and block_type (CLB_IO_CLK, BLOCK_RAM, etc). """
     return {
-        # (tile_type, block_type): (frames, words)
-        ("INT", "CLB_IO_CLK"): (76, 3),
-        ("PS8_INTF", "CLB_IO_CLK"): (None, 3),
-        ("RCLK_INT_L", "CLB_IO_CLK"): (None, 3),
-        ("ECC", "CLB_IO_CLK"): (None, 3),
-        ("XIPHY", "CLB_IO_CLK"): (None, 45),
-    }.get((tile_type, block_type), None)
+        # (architecture, tile_type, block_type): (frames, words)
+        ("UltraScalePlus", "CLE", "CLB_IO_CLK"): (16, 3),
+        ("UltraScalePlus", "INT", "CLB_IO_CLK"): (76, 3),
+        ("UltraScalePlus", "PS8_INTF", "CLB_IO_CLK"): (76, 3),
+        ("UltraScalePlus", "RCLK_INT_L", "CLB_IO_CLK"): (76, 3),
+        ("UltraScalePlus", "ECC", "CLB_IO_CLK"): (None, 3),
+        ("UltraScalePlus", "XIPHY", "CLB_IO_CLK"): (76, 45),
+        ("UltraScalePlus", "BRAM", "CLB_IO_CLK"): (16, 15),
+        ("UltraScalePlus", "BRAM", "BRAM_BLOCK"): (255, 15),
+        ("UltraScale", "CLE", "CLB_IO_CLK"): (16, 2),
+        ("UltraScale", "INT", "CLB_IO_CLK"): (17, 2),
+        ("UltraScale", "RCLK_INT_L", "CLB_IO_CLK"): (62, 3),
+        ("UltraScale", "ECC", "CLB_IO_CLK"): (None, 0),
+        ("UltraScale", "XIPHY", "CLB_IO_CLK"): (76, 45),
+        ("UltraScale", "BRAM", "CLB_IO_CLK"): (16, 10),
+        ("UltraScale", "BRAM", "BRAM_BLOCK"): (255, 10),
+    }.get((os.getenv("URAY_ARCH"), tile_type, block_type), None)
 
 
 def get_int_params():
@@ -93,13 +105,13 @@ def add_tile_bits(tile_name,
     if frames is None:
         frames = tile_frames.get_tile_frames(baseaddr)
 
-    assert offset <= 93 * 2, (tile_name, offset)
+    assert offset <= WORDS_IN_FRAME * 32 // BITS_PER_WORD, (tile_name, offset)
     # Few rare cases at X=0 for double width tiles split in half => small negative offset
     assert offset >= 0 or "IOB" in tile_name, (tile_name, hex(baseaddr),
                                                offset)
-    assert 1 <= words <= 93 * 2, words
-    assert offset + words <= 93 * 2, (tile_name, offset + words, offset, words,
-                                      block_type)
+    assert 1 <= words <= WORDS_IN_FRAME * 32 // BITS_PER_WORD, words
+    assert offset + words <= WORDS_IN_FRAME * 32 // BITS_PER_WORD, (
+        tile_name, offset + words, offset, words, block_type)
 
     baseaddr_str = '0x%08X' % baseaddr
     block = bits.get(block_type, None)

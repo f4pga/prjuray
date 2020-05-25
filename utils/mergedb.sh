@@ -70,6 +70,14 @@ case "$1" in
 		sed < "$2" > "$tmp1" \
 			-e 's/^CLE./CLEM_R./' ;;
 
+	cle_m)
+		sed < "$2" > "$tmp1" \
+			-e 's/^CLE./CLE_M./' ;;
+
+	cle_m_r)
+		sed < "$2" > "$tmp1" \
+			-e 's/^CLE./CLE_M_R./' ;;
+
 	rclk_int_l)
 		sed < "$2" > "$tmp1" \
 			-e 's/^RCLK_INT./RCLK_INT_L./' ;;

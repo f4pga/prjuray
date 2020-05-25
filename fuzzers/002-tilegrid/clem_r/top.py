@@ -22,7 +22,7 @@ def gen_sites():
     for tile_name in sorted(grid.tiles()):
         loc = grid.loc_of_tilename(tile_name)
         gridinfo = grid.gridinfo_at_loc(loc)
-        if gridinfo.tile_type in ['CLEM_R']:
+        if gridinfo.tile_type in ['CLEM_R', 'CLE_M_R']:
             site_name = sorted(gridinfo.sites.keys())[0]
             yield tile_name, site_name
 

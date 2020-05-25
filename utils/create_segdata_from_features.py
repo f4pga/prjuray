@@ -14,6 +14,7 @@ from utils.segmaker import Segmaker
 from utils import util
 from utils.db import Database
 from utils.grid_types import BlockType
+import os
 
 
 class FeatureTree():
@@ -199,7 +200,10 @@ def run():
         tile_types.add(tile_type)
 
     for tile_type in tile_types:
-        segmk = Segmaker(args.bits_file, bits_per_word=16)
+        segmk = Segmaker(
+            args.bits_file,
+            bits_per_word=16
+            if os.getenv('URAY_ARCH') == 'UltraScalePlus' else 32)
         segmk.set_def_bt(args.block_type)
 
         tree = feature_trees[tile_type]

@@ -10,6 +10,10 @@
 # SPDX-License-Identifier: ISC
 
 from utils import bitsmaker
+import os
+
+FRAME_ADDRESS_ALIGNMENT = 0x80 if (
+    os.getenv('URAY_ARCH') == 'UltraScale') else 0x100
 
 
 def run(bits_fn,
@@ -22,6 +26,7 @@ def run(bits_fn,
         dbit,
         multi=False,
         filter_words=None,
+        filter_frames=None,
         verbose=False):
     # mimicing tag names, wasn't sure if it would break things otherwise
     metastr = "DWORD:%u" % dword
@@ -45,8 +50,8 @@ def run(bits_fn,
 
     bitfilter = None
 
-    if filter_words is not None:
-        bitfilter = lambda frame, word: not (word in filter_words)
+    if filter_words is not None or filter_frames is not None:
+        bitfilter = lambda frame, word: not ((filter_frames is not None and (frame % FRAME_ADDRESS_ALIGNMENT) in filter_frames) or (filter_words is not None and word in filter_words))
 
     bitsmaker.write(bits_fn, fnout, tags, bitfilter)
 
@@ -94,11 +99,21 @@ def main():
         required=False,
         default=None,
         help="Filter out word from bit data")
+    parser.add_argument(
+        "--filter_frames",
+        required=False,
+        default=None,
+        help="Filter out frames from bit data")
     args = parser.parse_args()
 
     filter_words = None
     if args.filter_words is not None:
         filter_words = list(map(int, args.filter_words.split(',')))
+
+    filter_frames = None
+    if args.filter_frames is not None:
+        filter_frames = list(
+            map(lambda x: int(x, 16), args.filter_frames.split(',')))
 
     run(args.bits_file,
         args.design,
@@ -110,6 +125,7 @@ def main():
         None if args.dbit == "" else int(args.dbit, 10),
         multi=args.multi,
         filter_words=filter_words,
+        filter_frames=filter_frames,
         verbose=args.verbose)
 
 

@@ -23,7 +23,7 @@ def gen_lut_sites():
     for tile_name in sorted(grid.tiles()):
         loc = grid.loc_of_tilename(tile_name)
         gridinfo = grid.gridinfo_at_loc(loc)
-        if gridinfo.tile_type in ['CLEL_L', 'CLEL_R', 'CLEM']:
+        if gridinfo.tile_type in ['CLEL_L', 'CLEL_R', 'CLEM', 'CLE_M']:
             site_name = sorted(gridinfo.sites.keys())[0]
             yield site_name
 
@@ -38,7 +38,7 @@ def gen_sites():
         gridinfo = grid.gridinfo_at_loc(loc)
 
         for site_name, site_type in gridinfo.sites.items():
-            if site_type == 'BUFCE_LEAF':
+            if site_type in ['BUFCE_LEAF', 'BUFCE_LEAF_X16']:
                 if tile_name not in o:
                     o[tile_name] = []
 
@@ -48,7 +48,8 @@ def gen_sites():
 
 
 # BUFCE_LEAF_X32Y11 -> (32, 11)
-RE_BUFCE_LEAF = re.compile(r'BUFCE_LEAF_X(\d+)Y(\d+)')
+# BUFCE_LEAF_X16_X32Y11 -> (32, 11)
+RE_BUFCE_LEAF = re.compile(r'BUFCE_LEAF_(?:X16_)?X(\d+)Y(\d+)')
 
 
 def get_site_xy(site):

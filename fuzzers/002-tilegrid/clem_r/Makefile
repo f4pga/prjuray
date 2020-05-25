@@ -6,7 +6,12 @@
 #
 # SPDX-License-Identifier: ISC
 
+ifeq (${URAY_DATABASE}, kintexus)
+N ?= 24
+GENERATE_ARGS?=--oneval 1 --design params.csv --dword 0 --dframe 0
+else
 N ?= 15
 GENERATE_ARGS?=--oneval 1 --design params.csv --dword 0 --dframe 0B --filter_words 46
+endif
 include ../fuzzaddr/common.mk
 

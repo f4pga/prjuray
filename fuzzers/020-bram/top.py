@@ -21,8 +21,8 @@ def spec_num():
 
 
 SPECS = (
-    (bram18, 10),
-    (bram36, 10),
+    (bram18, 5),
+    (bram36, 5),
 )
 
 

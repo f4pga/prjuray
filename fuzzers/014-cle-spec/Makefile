@@ -34,8 +34,13 @@ database: $(BUILD_DIR)/invpips.txt $(SPECIMENS_OK)
 pushdb:
 	$(URAY_MERGEDB) clel_l $(BUILD_DIR)/segbits_clel_l.db
 	$(URAY_MERGEDB) clel_r $(BUILD_DIR)/segbits_clel_r.db
+ifeq ($(URAY_ARCH), UltraScalePlus)
 	$(URAY_MERGEDB) clem $(BUILD_DIR)/segbits_clem.db
 	$(URAY_MERGEDB) clem_r $(BUILD_DIR)/segbits_clem_r.db
+else
+	$(URAY_MERGEDB) cle_m $(BUILD_DIR)/segbits_cle_m.db
+	$(URAY_MERGEDB) cle_m_r $(BUILD_DIR)/segbits_cle_m_r.db
+endif
 
 $(BUILD_DIR)/all_pips/design.features: ${URAY_UTILS_DIR}/generate_all_pip_features.tcl
 	mkdir -p $(BUILD_DIR)/all_pips

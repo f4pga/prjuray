@@ -112,9 +112,12 @@ def print_top(seed):
             ["RSTREG", "REGCE"]))
         print("        .RSTREG_PRIORITY_B(\"%s\")," % np.random.choice(
             ["RSTREG", "REGCE"]))
-        for pin in ("CLKARDCLK", "CLKBWRCLK", "ENARDEN", "ENBWREN",
-                    "RSTRAMARSTRAM", "RSTRAMB", "RSTREGARSTREG", "RSTREGB"):
-            print("        .IS_%s_INVERTED(%d)," % (pin, np.random.randint(2)))
+        clk_inv = np.random.randint(2)
+        print("        .IS_CLKARDCLK_INVERTED(%d)," % clk_inv)
+        print("        .IS_CLKBWRCLK_INVERTED(%d)," % clk_inv)
+        for pin in ("ENARDEN", "ENBWREN", "RSTRAMARSTRAM", "RSTRAMB",
+                    "RSTREGARSTREG", "RSTREGB"):
+            print("        .IS_%s_INVERTED(%d)," % (pin, clk_inv))
         print("        .INIT_A({18'd%d, 18'd%d})," % (np.random.randint(
             2**18), np.random.randint(2**18)))
         print("        .INIT_B({18'd%d, 18'd%d})," % (np.random.randint(
