@@ -11,6 +11,8 @@
 set -e
 
 
+if [ -f $KOKORO_KEYSTORE_DIR/74045_foss-fpga-tools_arch-defs_ssh_private ]; then
+
 chmod 600 $KOKORO_KEYSTORE_DIR/74045_foss-fpga-tools_arch-defs_ssh_private
 cat <<EOF > ssh_config
 Host github.com
@@ -20,6 +22,9 @@ EOF
 
 export GIT_SSH_COMMAND="ssh -F $(pwd)/ssh_config"
 ${GIT_SSH_COMMAND} git@github.com || true
+
+fi
+
 
 echo
 echo "========================================"
