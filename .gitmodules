@@ -4,9 +4,6 @@
 [submodule "third_party/python-sdf-timing"]
 	path = third_party/python-sdf-timing
 	url = https://github.com/SymbiFlow/python-sdf-timing.git
-[submodule "third_party/symbiflow-tools"]
-	path = third_party/prjuray-tools
-	url = git@github.com:antmicro/prjuray-tools.git
 [submodule "third_party/edalize"]
 	path = third_party/edalize
 	url = https://github.com/SymbiFlow/edalize.git

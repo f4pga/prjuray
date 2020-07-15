@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
 
-db_full = """\
-# Format: //devtools/kokoro/config/proto/build.proto
-
-build_file: "symbiflow-prjuray-%(kokoro_type)s-db-%(part)s/.github/kokoro/db-full.sh"
-
-timeout_mins: 4320
+get_key = """\
 
 before_action {
   fetch_keystore {
@@ -15,6 +10,15 @@ before_action {
     }
   }
 }
+"""
+
+
+db_full = """\
+# Format: //devtools/kokoro/config/proto/build.proto
+
+build_file: "symbiflow-prjuray-%(kokoro_type)s-db-%(part)s/.github/kokoro/db-full.sh"
+
+timeout_mins: 4320
 
 action {
   define_artifacts {
@@ -62,6 +66,7 @@ for part in ['zynqusp', 'kintexus']:
             'part': part,
             'kokoro_type': 'continuous',
         })
+        f.write(get_key)
 
     with open("presubmit-db-%s.cfg" % part, "w") as f:
         f.write(db_full % {
