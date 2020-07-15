@@ -12,7 +12,6 @@ before_action {
 }
 """
 
-
 db_full = """\
 # Format: //devtools/kokoro/config/proto/build.proto
 
