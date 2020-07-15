@@ -7,7 +7,7 @@
 #
 # SPDX-License-Identifier: ISC
 
-GITHUB_URL=git@github.com:SymbiFlow/prjuray-db.git
+GITHUB_URL=https://github.com/SymbiFlow/prjuray-db.git
 rm -rf database
 git clone $GITHUB_URL database
 # Update files in the database from our version so fuzzers run correctly.
