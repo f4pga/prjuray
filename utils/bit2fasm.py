@@ -36,7 +36,7 @@ def bit_to_bits(bitread,
         frame_range_arg = ''
 
     subprocess.check_output(
-        '{} --part_file {} --architecture {} {} -o {} -z -y {}'.format(
+        '{} -E --part_file {} --architecture {} {} -o {} -z -y {}'.format(
             bitread, part_yaml, arch, frame_range_arg, bits_file, bit_file),
         shell=True)
 
