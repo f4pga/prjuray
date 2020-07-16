@@ -192,7 +192,12 @@ make db-check-${URAY_SETTINGS}
 		git config user.email "foss-fpga-tools-bot+kokoro@google.com"
 		git commit -s -m "$COMMIT_MSG"
 		git remote get-url origin | grep -q "prjuray-db" || exit 1
-		git push origin next_${URAY_SETTINGS}_db --force
+
+		# Make sure remote is an SSH path.
+		git remote add origin_ssh $(git remote get-url origin | sed 's/https\:\/\/github.com\//git@github.com\:/')
+		echo "Pushing to $(git remote get-url origin_ssh)"
+
+		git push origin_ssh next_${URAY_SETTINGS}_db --force
 	fi
 )
 
