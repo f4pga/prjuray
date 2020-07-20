@@ -119,7 +119,8 @@ for {set j $start } { $j < $stop } { incr j } {
         puts $fp "\t\t\t\"dst_wire\":\"[get_wires -quiet -downhill -of_objects $pip]\","
         puts $fp "\t\t\t\"is_pseudo\":\"[get_property IS_PSEUDO $pip]\","
         puts $fp "\t\t\t\"is_directional\":\"[get_property IS_DIRECTIONAL $pip]\","
-        puts $fp "\t\t\t\"can_invert\":\"[get_property CAN_INVERT $pip]\""
+        puts $fp "\t\t\t\"can_invert\":\"[get_property CAN_INVERT $pip]\","
+        puts $fp "\t\t\t\"is_fixed_inversion\":\"[get_property IS_FIXED_INVERSION $pip]\""
         puts $fp "\t\t\},"
     }
     puts $fp "\t\t\{\}"
