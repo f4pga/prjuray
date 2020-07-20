@@ -1060,7 +1060,7 @@ proc dump_features {} {
 
             if { $site_type == "SLICEM" } {
                 for {set i 0} {$i < 3} { incr i} {
-                    dict lappend sitefeatures_by_tile $key "WA[expr $i+7]USED.[lindex $waused $i]"
+                    dict lappend sitefeatures_by_tile $key "WA[expr $i+7]USED.V[lindex $waused $i]"
                 }
             }
         } elseif {$site_type == "BUFCE_LEAF"} {
