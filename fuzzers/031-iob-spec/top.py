@@ -15,7 +15,7 @@ from utils.spec import empty
 from utils import spec_top
 
 SPECS = (
-    (io, 125),
+    (io, 200),
     (iologic, 100),
     (empty, 1),
 )

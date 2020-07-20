@@ -7,7 +7,7 @@
 # SPDX-License-Identifier: ISC
 
 BUILD_DIR = build
-N := 226
+N := 301
 
 SPECIMENS := $(addprefix $(BUILD_DIR)/specimen_,$(shell seq -f '%03.0f' $(N)))
 SPECIMENS_OK := $(addsuffix /OK,$(SPECIMENS))
