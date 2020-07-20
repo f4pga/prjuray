@@ -114,7 +114,7 @@ quick:
 
 # roi_only runs the fuzzers required for supporting additional parts when building
 # a roi harness.
-roi_only: 000-init-db/run.${URAY_PART}.ok 001-part-yaml/run.${URAY_PART}.ok
+roi_only: 000-init-db/run.${URAY_PART}.ok 001-part-yaml/run.${URAY_PART}.ok 005-pins/run.${URAY_PART}.ok
 	# Copy tilegrid and tileconn
 	cp ${URAY_FAMILY_DIR}/${URAY_EQUIV_PART}/tilegrid.json ${URAY_FAMILY_DIR}/${URAY_PART}/tilegrid.json
 	cp ${URAY_FAMILY_DIR}/${URAY_EQUIV_PART}/tileconn.json ${URAY_FAMILY_DIR}/${URAY_PART}/tileconn.json
