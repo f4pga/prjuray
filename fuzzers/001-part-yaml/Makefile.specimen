@@ -1,5 +1,5 @@
 part.yaml: design.perframecrc.bit
-	${URAY_TOOLS_DIR}/gen_part_base_yaml $< -f -architecture UltraScalePlus > $@
+	${URAY_TOOLS_DIR}/gen_part_base_yaml $< -f -architecture ${URAY_ARCH} > $@
 
 design.bit design.perframecrc.bit: ../../generate.tcl
 	${URAY_VIVADO} -mode batch -source ../../generate.tcl

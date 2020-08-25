@@ -42,6 +42,10 @@ def gen_sites():
             if not int_tile_name.startswith('INT_'):
                 continue
 
+            if os.getenv('URAY_ARCH') == 'UltraScale':
+                if int_tile_name.endswith('Y298'):
+                    continue
+
             yield int_tile_name, site_name
 
 

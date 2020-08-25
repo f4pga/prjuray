@@ -1,0 +1,25 @@
+export URAY_DATABASE="kintexus"
+export URAY_PART="xcku035-sfva784-1-c"
+export URAY_ARCH="UltraScale"
+
+export URAY_ROI_FRAMES="0x00000000:0xffffffff"
+
+# All CLB's in part, all BRAM's in part, all DSP's in part.
+export URAY_ROI_TILEGRID="SLICE_X0Y120:SLICE_X28Y179 DSP48E2_X0Y48:DSP48E2_X2Y71 RAMB18_X0Y70:RAMB18_X2Y71 RAMB36_X0Y24:RAMB36_X2Y35"
+
+# These settings must remain in sync
+export URAY_ROI="SLICE_X0Y120:SLICE_X28Y179 DSP48E2_X0Y48:DSP48E2_X2Y71 RAMB18_X0Y70:RAMB18_X2Y71 RAMB36_X0Y24:RAMB36_X2Y35"
+
+# Most of CMT X0Y2.
+export URAY_ROI_GRID_X1="159"
+export URAY_ROI_GRID_X2="239"
+# Include VBRK / VTERM
+export URAY_ROI_GRID_Y1="0"
+export URAY_ROI_GRID_Y2="62"
+
+export URAY_PIN_00="AD20"
+export URAY_PIN_01="AH24"
+export URAY_PIN_02="AA19"
+export URAY_PIN_03="Y19"
+
+source $(dirname ${BASH_SOURCE[0]})/../utils/environment.sh

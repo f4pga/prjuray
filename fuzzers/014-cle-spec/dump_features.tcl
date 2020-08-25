@@ -20,6 +20,8 @@ proc dump_features_to_file {output_file} {
 
     set tiles [get_tiles -quiet -regexp -filter {TYPE =~ CLE[LM]_[LR]}]
     lappend tiles [get_tiles -quiet -regexp -filter {TYPE == CLEM}]
+    lappend tiles [get_tiles -quiet -regexp -filter {TYPE == CLE_M}]
+    lappend tiles [get_tiles -quiet -regexp -filter {TYPE == CLE_M_R}]
 
     output_features_to_file $output_file $tiles $pips_by_tile $sitefeatures_by_tile
 

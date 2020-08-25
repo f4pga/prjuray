@@ -10,6 +10,7 @@
 # SPDX-License-Identifier: ISC
 
 import json
+import os
 from utils import xjson
 '''
 Historically we grouped data into "segments"
@@ -55,7 +56,7 @@ def propagate_INT_bits_in_column(database, tiles_by_grid, tile_frames_map):
     INT tiles next to INT tiles increase the word offset by 3.
 
     """
-    int_frames, int_words = localutil.get_entry('INT', 'CLB_IO_CLK')
+    int_frames, int_words = localutil.get_int_params()
 
     propagate_bits_in_column(
         database=database,
@@ -169,7 +170,9 @@ def propagate_bits_in_column(database, tiles_by_grid, tile_type, term_b,
             next_tile = tiles_by_grid[(tile['grid_x'], tile['grid_y'] - 1)]
             next_tile_type = database[next_tile]['type']
 
-            if tile['bits']['CLB_IO_CLK']['offset'] == 183:
+            if tile['bits']['CLB_IO_CLK']['offset'] == (
+                    183
+                    if os.getenv('URAY_ARCH') == 'UltraScalePlus' else 121):
                 assert next_tile_type in [term_t, rbrk], next_tile_type
                 break
 
@@ -284,7 +287,8 @@ def run(json_in_fn, json_out_fn, verbose=False):
 
     tile_frames_map = localutil.TileFrames()
     propagate_INT_bits_in_column(database, tiles_by_grid, tile_frames_map)
-    propagate_PS8_INTF_bits_in_column(database, tiles_by_grid, tile_frames_map)
+    if os.getenv('URAY_ARCH') == "UltraScalePlus":
+        propagate_PS8_INTF_bits_in_column(database, tiles_by_grid, tile_frames_map)
     propagate_RCLK_bits_in_row(database, tiles_by_grid, tile_frames_map)
     propagate_XIPHY_bits_in_column(database, tiles_by_grid, tile_frames_map)
 

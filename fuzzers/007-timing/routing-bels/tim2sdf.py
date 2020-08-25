@@ -65,7 +65,10 @@ def read_raw_timings(fin):
 
             # Parse the rest of the model name
             fields = speed_model.split("__")
-            src_pin, dst_pin = fields[2:4]
+            if (len(fields)) == 3:
+                src_pin, dst_pin = fields[1:3]
+            else:
+                src_pin, dst_pin = fields[2:4]
 
             # Cell type
             if is_net:

@@ -30,8 +30,10 @@ database: bel/build/sdf.ok routing-bels/build/sdf.ok
 	mkdir -p sdfs
 	python3 ${URAY_UTILS_DIR}/sdfmerge.py --sdfs $(SLICEL_SDFS) --site SLICEL --out sdfs/SLICEL.sdf
 	python3 ${URAY_UTILS_DIR}/sdfmerge.py --sdfs $(SLICEM_SDFS) --site SLICEM --out sdfs/SLICEM.sdf
+ifeq (${URAY_ARCH}, UltraScalePlus)
 	python3 ${URAY_UTILS_DIR}/sdfmerge.py --sdfs $(RAMBFIFO36_SDFS) --site RAMBFIFO36 --out sdfs/RAMBFIFO36.sdf
 	python3 ${URAY_UTILS_DIR}/sdfmerge.py --sdfs $(RAMB181_SDFS) --site RAMB181 --out sdfs/RAMB181.sdf
+endif
 ifeq (${URAY_PART}, xczu7ev-ffvc1156-2-i)
 	python3 ${URAY_UTILS_DIR}/sdfmerge.py --sdfs $(URAM_SDFS) --site URAM288 --out sdfs/URAM288.sdf
 endif

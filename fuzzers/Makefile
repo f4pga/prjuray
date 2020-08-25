@@ -94,13 +94,16 @@ $(eval $(call fuzzer,004-tileinfo,002-tilegrid,part))
 $(eval $(call fuzzer,005-pins,001-part-yaml,part))
 $(eval $(call fuzzer,007-timing,001-part-yaml,all))
 $(eval $(call fuzzer,014-cle-spec,002-tilegrid,all))
-$(eval $(call fuzzer,020-bram,002-tilegrid,all))
+#FIXME Uncomment bram fuzzer once fixed
+#$(eval $(call fuzzer,020-bram,002-tilegrid,all))
 $(eval $(call fuzzer,021-bram-data,002-tilegrid,all))
 $(eval $(call fuzzer,031-iob-spec,002-tilegrid,all))
 $(eval $(call fuzzer,050-int-seed,002-tilegrid,all))
+ifeq ($(URAY_ARCH), UltraScalePlus)
 $(eval $(call fuzzer,060-rclk-seed,002-tilegrid,all))
 $(eval $(call fuzzer,070-ps8-int,002-tilegrid,all))
 $(eval $(call fuzzer,071-ps8-bufg,002-tilegrid,all))
+endif
 else
 all:: 002-tilegrid/run.ok
 	touch 002-tilegrid/run.ok

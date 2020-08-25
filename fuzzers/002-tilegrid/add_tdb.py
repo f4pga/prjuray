@@ -13,7 +13,10 @@ import json
 import util as localutil
 import os
 
-BITS_PER_WORD = 16
+if os.getenv('URAY_ARCH') == 'UltraScale':
+    BITS_PER_WORD = 32
+else:
+    BITS_PER_WORD = 16
 
 
 def check_frames(tagstr, addrlist):
@@ -60,7 +63,8 @@ def load_db(fn):
         for part in tparts[1:]:
             # Auto align the frame address to the next lowest multiple of 0x100.
             if part == 'AUTO_FRAME':
-                frame -= (frame % 0x100)
+                frame -= (frame % (
+                    0x80 if os.getenv('URAY_ARCH') == 'UltraScale' else 0x100))
                 continue
 
             k, v = part.split(':')
@@ -79,50 +83,62 @@ def load_db(fn):
         if not bitidx_up:
             bitidx = 0
         assert bitidx == 0, l
-        assert frame % 0x100 == 0, "Unaligned frame at 0x%08X" % frame
+        assert frame % (0x80 if os.getenv('URAY_ARCH') == 'UltraScale' else
+                        0x100) == 0, "Unaligned frame at 0x%08X" % frame
         yield (tile, frame, wordidx)
 
 
 def run(fn_in, fn_out, verbose=False):
     database = json.load(open(fn_in, "r"))
-
+    cle_frames, cle_words = localutil.get_entry('CLE', 'CLB_IO_CLK')
     int_frames, int_words = localutil.get_entry('INT', 'CLB_IO_CLK')
     rclk_frames, rclk_words = localutil.get_entry('RCLK_INT_L', 'CLB_IO_CLK')
-    ps8_intf_frames, ps8_intf_words = localutil.get_entry(
-        "PS8_INTF", "CLB_IO_CLK")
     xiphy_frames, xiphy_words = localutil.get_entry("XIPHY", "CLB_IO_CLK")
+    bram_frames, bram_words = localutil.get_entry('BRAM', 'CLB_IO_CLK')
+    bram_block_frames, bram_block_words = localutil.get_entry(
+        'BRAM', 'BRAM_BLOCK')
+    if os.getenv('URAY_ARCH') == 'UltraScalePlus':
+        ps8_intf_frames, ps8_intf_words = localutil.get_entry(
+            "PS8_INTF", "CLB_IO_CLK")
 
     build_dir = "build_" + os.getenv('URAY_PART')
     tdb_fns = [
-        ("cle/" + build_dir + "/segbits_tilegrid.tdb", 16, 3),
-        ("clem_r/" + build_dir + "/segbits_tilegrid.tdb", 16, 3),
+        ("cle/" + build_dir + "/segbits_tilegrid.tdb", cle_frames, cle_words),
+        ("clem_r/" + build_dir + "/segbits_tilegrid.tdb", cle_frames,
+         cle_words),
         ("clel_int/" + build_dir + "/segbits_tilegrid.tdb", int_frames,
          int_words),
         ("clem_int/" + build_dir + "/segbits_tilegrid.tdb", int_frames,
          int_words),
         ("rclk_int/" + build_dir + "/segbits_tilegrid.tdb", rclk_frames,
          rclk_words),
-        ("rclk_other/" + build_dir + "/segbits_tilegrid.tdb", rclk_frames,
-         rclk_words),
-        ("rclk_hdio/" + build_dir + "/segbits_tilegrid.tdb", rclk_frames,
-         rclk_words),
-        ("rclk_dsp_intf_clkbuf/" + build_dir + "/segbits_tilegrid.tdb",
-         rclk_frames, rclk_words),
-        ("rclk_pss_alto/" + build_dir + "/segbits_tilegrid.tdb", rclk_frames,
-         rclk_words),
-        ("intf_r_pcie4_hdio/" + build_dir + "/segbits_tilegrid.tdb", None, 3),
-        ("ps8_intf/" + build_dir + "/segbits_tilegrid.tdb", ps8_intf_frames,
-         ps8_intf_words),
-        ("cmt_right/" + build_dir + "/segbits_tilegrid.tdb", None, 10),
-        ("pss_alto/" + build_dir + "/segbits_tilegrid.tdb", None, 93 * 2),
-        ("hdio_top_right/" + build_dir + "/segbits_tilegrid.tdb", None, 87),
-        ("hdio_bot_right/" + build_dir + "/segbits_tilegrid.tdb", None, 87),
-        ("hpio_right/" + build_dir + "/segbits_tilegrid.tdb", None, 85),
-        ("bitslice_tiles/" + build_dir + "/segbits_tilegrid.tdb", xiphy_frames,
-         xiphy_words),
-        ("bram/" + build_dir + "/segbits_tilegrid.tdb", None, 15),
-        ("bram_block/" + build_dir + "/segbits_tilegrid.tdb", None, 15),
+        ("bram/" + build_dir + "/segbits_tilegrid.tdb", bram_frames,
+         bram_words),
+        ("bram_block/" + build_dir + "/segbits_tilegrid.tdb",
+         bram_block_frames, bram_block_words),
     ]
+    if os.getenv('URAY_ARCH') == 'UltraScalePlus':
+        tdb_fns += [
+            ("rclk_other/" + build_dir + "/segbits_tilegrid.tdb", rclk_frames,
+             rclk_words),
+            ("rclk_hdio/" + build_dir + "/segbits_tilegrid.tdb", rclk_frames,
+             rclk_words),
+            ("rclk_dsp_intf_clkbuf/" + build_dir + "/segbits_tilegrid.tdb",
+             rclk_frames, rclk_words),
+            ("rclk_pss_alto/" + build_dir + "/segbits_tilegrid.tdb",
+             rclk_frames, rclk_words),
+            ("intf_r_pcie4_hdio/" + build_dir + "/segbits_tilegrid.tdb", 36,
+             3),
+            ("ps8_intf/" + build_dir + "/segbits_tilegrid.tdb",
+             ps8_intf_frames, ps8_intf_words),
+            ("cmt_right/" + build_dir + "/segbits_tilegrid.tdb", 36, 10),
+            ("pss_alto/" + build_dir + "/segbits_tilegrid.tdb", 36, 93 * 2),
+            ("hdio_top_right/" + build_dir + "/segbits_tilegrid.tdb", 76, 93),
+            ("hdio_bot_right/" + build_dir + "/segbits_tilegrid.tdb", 76, 93),
+            ("hpio_right/" + build_dir + "/segbits_tilegrid.tdb", 76, 85),
+            ("bitslice_tiles/" + build_dir + "/segbits_tilegrid.tdb",
+             xiphy_frames, xiphy_words),
+        ]
 
     tile_frames_map = localutil.TileFrames()
     for (tdb_fn, frames, words) in tdb_fns:

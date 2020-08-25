@@ -11,11 +11,15 @@ BUILD_FOLDER=build_${URAY_PART}
 BUILD_DIR=$(FUZDIR)/$(BUILD_FOLDER)
 TILEGRID_TDB_DEPENDENCIES=
 TILEGRID_TDB_DEPENDENCIES += cle/$(BUILD_FOLDER)/segbits_tilegrid.tdb \
+                             clem_r/$(BUILD_FOLDER)/segbits_tilegrid.tdb \
                              clel_int/$(BUILD_FOLDER)/segbits_tilegrid.tdb \
                              clem_int/$(BUILD_FOLDER)/segbits_tilegrid.tdb \
-                             clem_r/$(BUILD_FOLDER)/segbits_tilegrid.tdb \
                              rclk_int/$(BUILD_FOLDER)/segbits_tilegrid.tdb \
-                             rclk_other/$(BUILD_FOLDER)/segbits_tilegrid.tdb \
+                             bram/$(BUILD_FOLDER)/segbits_tilegrid.tdb \
+                             bram_block/$(BUILD_FOLDER)/segbits_tilegrid.tdb
+
+ifeq (${URAY_ARCH}, UltraScalePlus)
+TILEGRID_TDB_DEPENDENCIES += rclk_other/$(BUILD_FOLDER)/segbits_tilegrid.tdb \
                              rclk_hdio/$(BUILD_FOLDER)/segbits_tilegrid.tdb \
                              rclk_pss_alto/$(BUILD_FOLDER)/segbits_tilegrid.tdb \
                              cmt_right/$(BUILD_FOLDER)/segbits_tilegrid.tdb \
@@ -26,9 +30,8 @@ TILEGRID_TDB_DEPENDENCIES += cle/$(BUILD_FOLDER)/segbits_tilegrid.tdb \
                              hpio_right/$(BUILD_FOLDER)/segbits_tilegrid.tdb \
                              rclk_dsp_intf_clkbuf/$(BUILD_FOLDER)/segbits_tilegrid.tdb \
                              ps8_intf/$(BUILD_FOLDER)/segbits_tilegrid.tdb \
-                             bitslice_tiles/$(BUILD_FOLDER)/segbits_tilegrid.tdb \
-                             bram/$(BUILD_FOLDER)/segbits_tilegrid.tdb \
-                             bram_block/$(BUILD_FOLDER)/segbits_tilegrid.tdb
+                             bitslice_tiles/$(BUILD_FOLDER)/segbits_tilegrid.tdb
+endif
 
 GENERATE_FULL_ARGS=
 

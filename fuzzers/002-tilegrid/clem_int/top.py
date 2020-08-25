@@ -24,7 +24,7 @@ def gen_sites():
         gridinfo = grid.gridinfo_at_loc(loc)
 
         tile_type = gridinfo.tile_type
-        if tile_type in ['CLEM', 'CLEM_R']:
+        if tile_type in ['CLEM', 'CLEM_R', 'CLE_M', 'CLE_M_R']:
             # Don't fuzz the top and bottom of the grid, the interconnect
             # there behaves differently.
             _, _, y_min, y_max = grid.dims()
@@ -40,10 +40,11 @@ def gen_sites():
             if not int_tile_name.startswith('INT_'):
                 continue
 
-            if int_tile_name.endswith('Y31') or \
-                int_tile_name.endswith('Y91') or \
-                int_tile_name.endswith('Y151'):
-                continue
+            if os.getenv('URAY_ARCH') == 'UltraScalePlus':
+                if int_tile_name.endswith('Y31') or \
+                    int_tile_name.endswith('Y91') or \
+                    int_tile_name.endswith('Y151'):
+                    continue
 
             yield int_tile_name, site_name
 
