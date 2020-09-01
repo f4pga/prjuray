@@ -14,13 +14,13 @@ import os
 from utils import util
 
 # Break frames into WORD_SIZE bit words.
-WORD_SIZE_BITS = 16
+from prjuray.bitstream import WORD_SIZE_BITS
 
 # How many 16-bit words for frame in a US+ bitstream?
-FRAME_WORD_COUNT = 93 * 2
+from prjuray.bitstream import FRAME_WORD_COUNT
 
 # What alignment is expect for columns.
-FRAME_ALIGNMENT = 0x100
+from prjuray.bitstream import FRAME_ALIGNMENT
 '''
 Sample:
 bit_0002000f_079_06

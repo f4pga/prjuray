@@ -12,8 +12,8 @@
 import argparse
 from utils.segmaker import Segmaker
 from utils import util
-from utils.db import Database
-from utils.grid_types import BlockType
+from prjuray.db import Database
+from prjuray.grid_types import BlockType
 
 
 class FeatureTree():

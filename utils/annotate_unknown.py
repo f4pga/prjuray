@@ -12,9 +12,9 @@
 
 import argparse
 import fasm
-from utils import bitstream
-from utils.db import Database
-from utils.grid_types import BlockType
+from prjuray import bitstream
+from prjuray.db import Database
+from prjuray.grid_types import BlockType
 from utils import util
 
 
