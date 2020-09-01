@@ -21,8 +21,10 @@ import pickle
 import sys
 from collections import namedtuple
 
-from utils import util, lib, connections, tile_sizes
+from utils import util, tile_sizes
 from utils.xjson import extract_numbers
+
+from prjuray import lib, connections
 
 TileConnection = namedtuple('TileConnection',
                             'grid_deltas tile_types wire_pair')

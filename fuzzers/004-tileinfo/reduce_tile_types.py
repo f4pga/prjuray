@@ -18,7 +18,7 @@ set tile, an error will be generated.
 """
 
 import argparse
-import utils.lib
+import prjuray.lib
 import utils.node_lookup
 import datetime
 import subprocess
@@ -179,11 +179,11 @@ def check_wires(wires, sites, pips):
 
 def get_sites(tile, site_pin_node_to_wires):
     for site in tile['sites'][:-1]:
-        min_x_coord, min_y_coord = utils.lib.find_origin_coordinate(
+        min_x_coord, min_y_coord = prjuray.lib.find_origin_coordinate(
             site['site'], (site['site'] for site in tile['sites'][:-1]))
 
         orig_site_name = site['site']
-        coordinate = utils.lib.get_site_coordinate_from_name(orig_site_name)
+        coordinate = prjuray.lib.get_site_coordinate_from_name(orig_site_name)
 
         x_coord = coordinate.x_coord - min_x_coord
         y_coord = coordinate.y_coord - min_y_coord
@@ -435,7 +435,7 @@ def reduce_tile(pool, site_types, tile_type, tile_instances, database_file):
 
             for site_type in new_site_types:
                 if site_type['type'] in site_types:
-                    utils.lib.compare_prototype_site(
+                    prjuray.lib.compare_prototype_site(
                         site_type, site_types[site_type['type']])
                 else:
                     site_types[site_type['type']] = site_type
@@ -480,7 +480,7 @@ def main():
     args = parser.parse_args()
 
     print('{} Reading root.csv'.format(datetime.datetime.now()))
-    tiles, nodes = utils.lib.read_root_csv(args.root_dir)
+    tiles, nodes = prjuray.lib.read_root_csv(args.root_dir)
 
     processes = multiprocessing.cpu_count()
     print('Running {} processes'.format(processes))

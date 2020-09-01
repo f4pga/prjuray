@@ -15,7 +15,7 @@ import os
 import re
 from utils import util
 from utils import verilog
-from utils.db import Database
+from prjuray.db import Database
 
 
 def gen_sites():

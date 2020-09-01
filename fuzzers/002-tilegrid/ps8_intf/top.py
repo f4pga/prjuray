@@ -14,7 +14,7 @@ import os
 import random
 random.seed(int(os.getenv("SEED"), 16))
 from utils import util
-from utils.db import Database
+from prjuray.db import Database
 from utils.lut_maker import LutMaker
 
 
