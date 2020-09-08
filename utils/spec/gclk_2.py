@@ -13,7 +13,7 @@ import numpy as np
 import sys
 
 from utils import util
-from utils.db import Database
+from prjuray.db import Database
 
 
 def gen_bufgs():
