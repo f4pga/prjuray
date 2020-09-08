@@ -24,10 +24,15 @@ env:
 	virtualenv --python=python3 env
 	# Install utils
 	ln -sf $(PWD)/utils env/lib/python3.*/site-packages/
+	# Install prjuray-tools
+	ln -sf $(PWD)/third_party/prjuray-tools/prjuray env/lib/python3.*/site-packages/
 	# Install project dependencies
 	$(IN_ENV) pip install -r requirements.txt
 	# Install project's documentation dependencies
 	$(IN_ENV) pip install -r docs/requirements.txt
+	# Check prjuray-tools installation
+	$(IN_ENV) python -c "import prjuray"
+	$(IN_ENV) python -c "import prjuray.db"
 	# Check fasm library was installed
 	$(IN_ENV) python -c "import fasm"
 	$(IN_ENV) python -c "import fasm.output"
