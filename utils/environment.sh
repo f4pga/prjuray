@@ -28,7 +28,7 @@ fi
 
 # misc
 export URAY_PART_YAML="${URAY_DATABASE_DIR}/${URAY_DATABASE}/${URAY_PART}/part.yaml"
-export PYTHONPATH="${URAY_DIR}:${URAY_DIR}/third_party/fasm:${URAY_DIR}/third_party/prjuray-tools:$PYTHONPATH"
+export PYTHONPATH="${URAY_DIR}:${URAY_DIR}/third_party/fasm:$PYTHONPATH"
 
 # tools
 export URAY_GENHEADER="${URAY_UTILS_DIR}/genheader.sh"

@@ -24,8 +24,6 @@ env:
 	virtualenv --python=python3 env
 	# Install utils
 	ln -sf $(PWD)/utils env/lib/python3.*/site-packages/
-	# Install prjuray-tools
-	ln -sf $(PWD)/third_party/prjuray-tools/prjuray env/lib/python3.*/site-packages/
 	# Install project dependencies
 	$(IN_ENV) pip install -r requirements.txt
 	# Install project's documentation dependencies
