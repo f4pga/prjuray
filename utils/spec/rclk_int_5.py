@@ -12,7 +12,7 @@
 import numpy as np
 
 from utils import util
-from utils.db import Database
+from prjuray.db import Database
 from csv import DictReader
 from utils.clock_utils import GlobalClockBuffers, make_bufg
 

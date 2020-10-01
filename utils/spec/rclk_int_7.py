@@ -13,7 +13,7 @@ import numpy as np
 
 from utils import util
 from utils.clock_utils import ClockColumns, GlobalClockBuffers, MAX_GLOBAL_CLOCKS, make_bufg
-from utils.db import Database
+from prjuray.db import Database
 
 
 def gen_sites(grid):

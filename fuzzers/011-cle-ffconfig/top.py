@@ -14,7 +14,7 @@ import random
 import re
 
 from utils import util
-from utils.db import Database
+from prjuray.db import Database
 
 from prims import ff_bels, ff_bels_ffl, ffprims, isff
 

@@ -17,7 +17,7 @@ valid for all tile types.
 """
 
 import argparse
-import utils.lib
+import prjuray.lib
 import os
 import os.path
 import re
@@ -60,7 +60,7 @@ def main():
             if proto_site_type is None:
                 proto_site_type = instance_site_type
             else:
-                utils.lib.compare_prototype_site(
+                prjuray.lib.compare_prototype_site(
                     proto_site_type,
                     instance_site_type,
                 )

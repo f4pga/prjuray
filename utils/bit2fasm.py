@@ -16,7 +16,7 @@ import contextlib
 import os
 import fasm
 import fasm.output
-from db import Database
+from prjuray.db import Database
 import fasm_disassembler
 import bitstream
 import subprocess

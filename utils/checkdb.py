@@ -19,7 +19,7 @@ Relies on 074, which is too far into the process
 '''
 
 from utils import util
-from utils import db as prjuraydb
+from prjuray import db as prjuraydb
 import parsedb
 import glob
 

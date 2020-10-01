@@ -13,7 +13,7 @@ import csv
 import numpy as np
 from utils import util
 from utils.clock_utils import make_bufg, MAX_GLOBAL_CLOCKS
-from utils.db import Database
+from prjuray.db import Database
 
 CMT_XY_FUN = util.create_xy_fun('')
 

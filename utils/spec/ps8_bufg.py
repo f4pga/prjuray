@@ -13,7 +13,7 @@ import csv
 import numpy as np
 from utils import util
 from utils.clock_utils import MAX_GLOBAL_CLOCKS
-from utils.db import Database
+from prjuray.db import Database
 
 
 def ps8_bufg_pin_map_by_tile():

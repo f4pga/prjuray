@@ -15,7 +15,7 @@ import os
 
 from utils import util
 from utils.verilog import top_harness_clk
-from utils.db import Database
+from prjuray.db import Database
 
 
 def gen_sites():

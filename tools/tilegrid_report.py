@@ -10,8 +10,8 @@
 # SPDX-License-Identifier: ISC
 
 import argparse
-from utils.db import Database
-from utils.grid import BlockType
+from prjuray.db import Database
+from prjuray.grid import BlockType
 from utils import util
 
 

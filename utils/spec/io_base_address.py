@@ -12,7 +12,7 @@
 
 import os
 from utils import util
-from utils.db import Database
+from prjuray.db import Database
 
 
 def read_allowed_sites():

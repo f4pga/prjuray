@@ -12,7 +12,7 @@
 import numpy as np
 
 from utils import util
-from utils.db import Database
+from prjuray.db import Database
 from utils.clock_utils import GlobalClockBuffers, populate_leafs, MAX_GLOBAL_CLOCKS
 
 

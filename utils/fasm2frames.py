@@ -18,7 +18,7 @@ import json
 
 from utils import fasm_assembler, util
 from utils.bitstream import WORD_SIZE_BITS
-from utils.db import Database
+from prjuray.db import Database
 from utils.roi import Roi
 
 import sys

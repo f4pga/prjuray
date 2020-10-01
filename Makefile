@@ -28,6 +28,9 @@ env:
 	$(IN_ENV) pip install -r requirements.txt
 	# Install project's documentation dependencies
 	$(IN_ENV) pip install -r docs/requirements.txt
+	# Check prjuray-tools installation
+	$(IN_ENV) python -c "import prjuray"
+	$(IN_ENV) python -c "import prjuray.db"
 	# Check fasm library was installed
 	$(IN_ENV) python -c "import fasm"
 	$(IN_ENV) python -c "import fasm.output"

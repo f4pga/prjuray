@@ -19,7 +19,7 @@ import subprocess
 
 from utils import fasm_assembler, util
 from utils.bitstream import WORD_SIZE_BITS
-from utils.db import Database
+from prjuray.db import Database
 
 
 def dump_frm(f, frames):
