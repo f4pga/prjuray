@@ -15,9 +15,19 @@ sudo chown -R $USER ~/.Xilinx
 
 export XILINX_LOCAL_USER_DATA=no
 
-echo "========================================"
-echo "Mounting image with Vivado 2019.2"
-echo "----------------------------------------"
-sudo mkdir -p /image
-sudo mount UUID=aaa2471f-444f-4353-bdda-1822f48c0cd6 /image
+if [[ ! -d /image/Xilinx ]]; then
+	echo "========================================"
+	echo "Mounting image with Vivado 2019.2"
+	echo "----------------------------------------"
+	sudo mkdir -p /image
+	sudo mount UUID=aaa2471f-444f-4353-bdda-1822f48c0cd6 /image
+else
+	echo "========================================"
+	echo "Xilinx image with Vivado 2019.2 mounted"
+	echo "----------------------------------------"
+fi
+ls -l /image/
+ls -l /image/Xilinx/Vivado/
 export URAY_VIVADO_SETTINGS=/image/Xilinx/Vivado/2019.2/settings64.sh
+ls -l $URAY_VIVADO_SETTINGS
+echo "----------------------------------------"
