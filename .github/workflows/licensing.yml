@@ -18,13 +18,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        submodules: recursive
 
     - uses: SymbiFlow/actions/checks@main
       with:
-        third_party: |
-          ./third_party/edalize
-          ./third_party/embeddedsw
-          ./third_party/fasm
-          ./third_party/picosoc
-          ./third_party/prjuray-tools
-          ./third_party/python-sdf-timing
+        exclude_license: |
+          ./third_party/VexRiscv/VexRiscv_Full.v
+          ./third_party/VexRiscv/VexRiscv_Linux.v
+          ./third_party/litex/top_linux.v
+          ./third_party/litex/top_zephyr.v
+          ./minitests/opentitan/src.vivado/lowrisc_prim_all_0.1/rtl/prim_filter.sv
+          ./minitests/opentitan/src.vivado/lowrisc_prim_all_0.1/rtl/prim_filter_ctr.sv
+          ./minitests/opentitan/src.vivado/lowrisc_prim_all_0.1/rtl/prim_intr_hw.sv
+          ./minitests/opentitan/src.vivado/pulp-platform_riscv-dbg_0.1_0/pulp_riscv_dbg/debug_rom/debug_rom.sv
+          ./minitests/opentitan/src.vivado/pulp-platform_riscv-dbg_0.1_0/pulp_riscv_dbg/src/dm_csrs.sv
+          ./minitests/opentitan/src.vivado/pulp-platform_riscv-dbg_0.1_0/pulp_riscv_dbg/src/dm_mem.sv
+          ./minitests/opentitan/src.vivado/pulp-platform_riscv-dbg_0.1_0/pulp_riscv_dbg/src/dm_pkg.sv
+          ./minitests/opentitan/src.vivado/pulp-platform_riscv-dbg_0.1_0/pulp_riscv_dbg/src/dm_sba.sv
+          ./minitests/opentitan/src.vivado/pulp-platform_riscv-dbg_0.1_0/pulp_riscv_dbg/src/dmi_cdc.sv
+          ./minitests/opentitan/src.vivado/pulp-platform_riscv-dbg_0.1_0/pulp_riscv_dbg/src/dmi_jtag.sv
+          ./minitests/opentitan/src.vivado/pulp-platform_riscv-dbg_0.1_0/pulp_riscv_dbg/src/dmi_jtag_tap.sv
+
