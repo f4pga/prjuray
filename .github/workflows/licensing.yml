@@ -1,0 +1,42 @@
+# Copyright (C) 2017-2021  The SymbiFlow Authors.
+#
+# Use of this source code is governed by a ISC-style
+# license that can be found in the LICENSE file or at
+# https://opensource.org/licenses/ISC
+#
+# SPDX-License-Identifier: ISC
+
+name: Licensing
+
+on:
+  push:
+  pull_request:
+
+
+jobs:
+  Checks:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
+    - uses: SymbiFlow/actions/checks@main
+      with:
+        exclude_license: |
+          ./third_party/VexRiscv/VexRiscv_Full.v
+          ./third_party/VexRiscv/VexRiscv_Linux.v
+          ./third_party/litex/top_linux.v
+          ./third_party/litex/top_zephyr.v
+          ./minitests/opentitan/src.vivado/lowrisc_prim_all_0.1/rtl/prim_filter.sv
+          ./minitests/opentitan/src.vivado/lowrisc_prim_all_0.1/rtl/prim_filter_ctr.sv
+          ./minitests/opentitan/src.vivado/lowrisc_prim_all_0.1/rtl/prim_intr_hw.sv
+          ./minitests/opentitan/src.vivado/pulp-platform_riscv-dbg_0.1_0/pulp_riscv_dbg/debug_rom/debug_rom.sv
+          ./minitests/opentitan/src.vivado/pulp-platform_riscv-dbg_0.1_0/pulp_riscv_dbg/src/dm_csrs.sv
+          ./minitests/opentitan/src.vivado/pulp-platform_riscv-dbg_0.1_0/pulp_riscv_dbg/src/dm_mem.sv
+          ./minitests/opentitan/src.vivado/pulp-platform_riscv-dbg_0.1_0/pulp_riscv_dbg/src/dm_pkg.sv
+          ./minitests/opentitan/src.vivado/pulp-platform_riscv-dbg_0.1_0/pulp_riscv_dbg/src/dm_sba.sv
+          ./minitests/opentitan/src.vivado/pulp-platform_riscv-dbg_0.1_0/pulp_riscv_dbg/src/dmi_cdc.sv
+          ./minitests/opentitan/src.vivado/pulp-platform_riscv-dbg_0.1_0/pulp_riscv_dbg/src/dmi_jtag.sv
+          ./minitests/opentitan/src.vivado/pulp-platform_riscv-dbg_0.1_0/pulp_riscv_dbg/src/dmi_jtag_tap.sv
+
