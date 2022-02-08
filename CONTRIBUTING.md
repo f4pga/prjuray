@@ -12,7 +12,7 @@ All contributions should be sent as
 
 All software (code, associated documentation, support files, etc) in the
 Project U-Ray repository are licensed under the very permissive
-[ISC License](COPYING). A copy can be found in the [`COPYING`](COPYING) file.
+[Apache-2.0 License](LICENSE). A copy can be found in the [`LICENSE`](LICENSE) file.
 
 All new contributions must also be released under this license.
 
