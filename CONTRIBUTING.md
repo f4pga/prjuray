@@ -1,6 +1,6 @@
-# Contributing to Project U-Ray
+# Contributing to SymbiFlow Projects
 
-There are a couple of guidelines when contributing to Project U-Ray which are
+There are a couple of guidelines when contributing to SymbiFlow Projects which are
 listed here.
 
 ### Sending
@@ -11,8 +11,8 @@ All contributions should be sent as
 ### License
 
 All software (code, associated documentation, support files, etc) in the
-Project U-Ray repository are licensed under the very permissive
-[Apache-2.0 License](LICENSE). A copy can be found in the [`LICENSE`](LICENSE) file.
+Symbiflow repositories are licensed under the very permissive
+[ISC Licence](https://opensource.org/licenses/ISC). A copy can be found in the [`LICENSE`](LICENSE) file.
 
 All new contributions must also be released under this license.
 
@@ -79,19 +79,3 @@ following command to add signoffs to all commits between you and the upstream
 master:
 
     git rebase --signoff upstream/master
-
-### Contributing to the docs
-
-In addition to the above contribution guidelines, see the guide to
-[updating the Project U-Ray docs](UPDATING-THE-DOCS.md).
-
-
-
-
-
-
-----
-
-This file is generated from [README.md](README.md), please edit that file then
-run the `./.github/update-contributing.py`.
-
