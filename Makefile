@@ -171,9 +171,7 @@ $(foreach DB,$(DATABASES),$(eval $(call database,$(DB))))
 # Targets related to Project X-Ray parts
 # --------------------------------------
 
-#TODO: Re-enable when ready
-#ZYNQ_PARTS=zynq_usp_7ev
-ZYNQ_PARTS=
+ZYNQ_PARTS=zynq_usp_7ev
 
 URAY_PARTS=${ZYNQ_PARTS}
 
